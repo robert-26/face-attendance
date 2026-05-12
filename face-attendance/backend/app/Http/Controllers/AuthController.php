@@ -113,6 +113,28 @@ class AuthController extends Controller
             ->whereDate('tanggal', now()->toDateString())
             ->count();
 
-        return view('dashboard', compact('mahasiswaCount', 'absensiToday'));
+        $deadline = DB::table('settings')->where('key', 'deadline')->value('value') ?? '23:59';
+        return view('dashboard', compact('mahasiswaCount', 'absensiToday', 'deadline'));
+    }
+
+    public function updateSettings(Request $request)
+    {
+        if (!session('admin_logged_in')) {
+            return redirect()->route('login');
+        }
+
+        $request->validate([
+            'deadline' => 'required|date_format:H:i',
+        ], [
+            'deadline.required' => 'Batas waktu absensi wajib diisi.',
+            'deadline.date_format' => 'Format batas waktu harus HH:MM.',
+        ]);
+
+        DB::table('settings')->updateOrInsert(
+            ['key' => 'deadline'],
+            ['value' => $request->deadline, 'updated_at' => now()]
+        );
+
+        return back()->with('success', 'Batas waktu absensi berhasil diperbarui.');
     }
 }

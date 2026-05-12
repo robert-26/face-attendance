@@ -39,8 +39,8 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
+<div class="row g-3">
+    <div class="col-lg-7">
         <div class="glass-card">
             <div class="glass-card-header">
                 Aksi Cepat
@@ -57,6 +57,38 @@
                         <span>🧠</span> Latih Model Wajah
                     </a>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="glass-card h-100">
+            <div class="glass-card-header">
+                Pengaturan Absensi
+            </div>
+            <div class="glass-card-body">
+                <form action="{{ route('settings.update') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="deadline" class="form-label" style="font-size:.8125rem;font-weight:600;color:var(--text);">Batas Waktu Absensi</label>
+                        <input
+                            type="time"
+                            id="deadline"
+                            name="deadline"
+                            class="form-control @error('deadline') is-invalid @enderror"
+                            value="{{ old('deadline', $deadline) }}"
+                            required
+                        >
+                        @error('deadline')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                        <div style="font-size:.75rem;color:var(--text-muted);margin-top:.5rem;">
+                            Mahasiswa hanya dapat melakukan absen hadir atau izin sampai pukul {{ $deadline }} WIB.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-modern btn-primary-modern">
+                        Simpan Batas Waktu
+                    </button>
+                </form>
             </div>
         </div>
     </div>

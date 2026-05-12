@@ -2,39 +2,65 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="glass-card mt-4">
-            <div class="glass-card-header d-flex align-items-center">
-                <span style="font-size: 1.5rem; margin-right: 10px;">📷</span> Ambil Dataset Wajah
-            </div>
-            <div class="glass-card-body text-center py-5">
-                <div class="mb-4">
-                    <div style="font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">NIM Mahasiswa</div>
-                    <div style="font-size: 2rem; font-weight: 700; color: var(--primary-accent); font-family: monospace;">{{ $nim }}</div>
+    <div class="col-md-8 col-lg-6">
+
+        {{-- Page Header --}}
+        <div class="page-header">
+            <div class="page-title-group">
+                <div class="page-icon">📷</div>
+                <div>
+                    <h1 class="page-title">Ambil Dataset Wajah</h1>
+                    <p class="page-subtitle">Rekam wajah mahasiswa untuk pelatihan model</p>
                 </div>
-                
-                <p class="mb-4" style="color: var(--text-main); font-size: 1.1rem;">
-                    Tekan tombol di bawah untuk membuka kamera dan merekam dataset wajah (sekitar 20-30 gambar).
-                    <br><small style="color: var(--text-muted);">Pastikan pencahayaan cukup dan wajah terlihat jelas.</small>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="glass-card-header">
+                Mahasiswa: <span style="font-family:'Inter',monospace;color:#a5b4fc;font-weight:700;margin-left:.25rem;">{{ $nim }}</span>
+            </div>
+            <div class="glass-card-body text-center" style="padding:2rem 1.5rem;">
+
+                <p style="color:var(--text-secondary);font-size:.875rem;line-height:1.6;margin-bottom:1.5rem;">
+                    Tekan tombol di bawah untuk membuka kamera dan merekam dataset wajah (sekitar 25 gambar).<br>
+                    <span style="color:var(--text-muted);font-size:.8rem;">Pastikan pencahayaan cukup dan wajah terlihat jelas.</span>
                 </p>
-                
-                <div id="cameraContainer" style="display: none; margin-bottom: 20px;">
-                    <video id="webcam" autoplay playsinline style="width: 100%; max-width: 500px; border-radius: 12px; background: #000; margin: 0 auto; display: block; transform: scaleX(-1);"></video>
+
+                <div id="cameraContainer" style="display: none; margin-bottom: 1.5rem;">
+                    <video id="webcam" autoplay playsinline
+                           style="width: 100%; max-width: 480px; border-radius: 8px; background: #000; margin: 0 auto; display: block; transform: scaleX(-1); border: 1px solid var(--border);">
+                    </video>
                     <canvas id="canvas" style="display: none;"></canvas>
-                    <div class="progress mt-3" style="max-width: 500px; margin: 0 auto; height: 25px; border-radius: 12px; background: rgba(255,255,255,0.1);">
-                        <div id="captureProgress" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0%; font-weight: bold;">0 / 25</div>
+
+                    {{-- Progress bar --}}
+                    <div style="max-width:480px;margin:1rem auto 0;">
+                        <div style="display:flex;justify-content:space-between;margin-bottom:.4rem;">
+                            <span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;">Progress</span>
+                            <span style="font-size:.7rem;color:var(--text-secondary);" id="progressLabel">0 / 25</span>
+                        </div>
+                        <div class="progress" style="height:6px;border-radius:4px;background:rgba(255,255,255,.06);">
+                            <div id="captureProgress"
+                                 class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                 role="progressbar"
+                                 style="width: 0%; border-radius:4px; font-weight:bold;">
+                                0 / 25
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <form method="POST" action="{{ route('mahasiswa.capture.run') }}" id="captureForm" class="d-inline-block">
+                <form method="POST" action="{{ route('mahasiswa.capture.run') }}" id="captureForm" class="d-inline-flex gap-2">
                     @csrf
                     <input type="hidden" name="nim" value="{{ $nim }}">
                     <input type="hidden" name="images" id="imagesData">
-                    
-                    <button type="button" id="btnStart" class="btn-modern btn-primary-modern btn-lg px-4 py-3 mx-2 shadow" onclick="startCaptureProcess()">
-                        <span style="font-size: 1.2rem; margin-right: 8px;">⏺️</span> Buka Kamera & Rekam
+
+                    <button type="button" id="btnStart"
+                            class="btn-modern btn-primary-modern"
+                            style="padding:.6rem 1.25rem;"
+                            onclick="startCaptureProcess()">
+                        ⏺ Buka Kamera &amp; Rekam
                     </button>
-                    <a href="{{ route('mahasiswa.index') }}" class="btn-modern btn-secondary-modern btn-lg px-4 py-3 mx-2">
+                    <a href="{{ route('mahasiswa.index') }}" class="btn-modern btn-secondary-modern" style="padding:.6rem 1.25rem;">
                         Kembali
                     </a>
                 </form>
@@ -74,6 +100,7 @@
             stream.getTracks().forEach(track => track.stop());
             document.getElementById('imagesData').value = JSON.stringify(capturedImages);
             document.getElementById('captureProgress').innerText = "Selesai! Menyimpan...";
+            document.getElementById('progressLabel').textContent = "Selesai!";
             document.getElementById('captureForm').submit();
             return;
         }
@@ -89,6 +116,7 @@
         let percentage = (capturedImages.length / 25) * 100;
         document.getElementById('captureProgress').style.width = percentage + '%';
         document.getElementById('captureProgress').innerText = capturedImages.length + " / 25";
+        document.getElementById('progressLabel').textContent = capturedImages.length + " / 25";
 
         // Capture next frame after 200ms
         setTimeout(captureFrames, 200);

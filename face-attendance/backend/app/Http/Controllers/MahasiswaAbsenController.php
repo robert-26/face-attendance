@@ -7,6 +7,25 @@ use Illuminate\Support\Facades\DB;
 
 class MahasiswaAbsenController extends Controller
 {
+    private function getDeadline(): string
+    {
+        return DB::table('settings')->where('key', 'deadline')->value('value') ?? '23:59';
+    }
+
+    private function isPastDeadline(?string $deadline = null): bool
+    {
+        $deadline = $deadline ?? $this->getDeadline();
+
+        return now()->format('H:i') > $deadline;
+    }
+
+    private function deadlineMessage(?string $deadline = null): string
+    {
+        $deadline = $deadline ?? $this->getDeadline();
+
+        return 'Absensi hari ini sudah ditutup. Batas waktu absensi adalah pukul ' . $deadline . ' WIB.';
+    }
+
     /** Halaman absen mahasiswa */
     public function absenPage()
     {
@@ -24,10 +43,11 @@ class MahasiswaAbsenController extends Controller
             ->whereDate('tanggal', now()->toDateString())
             ->first();
 
-        // Deadline absen (jam 23:59 default, bisa diubah)
-        $deadline = '23:59';
+        // Deadline absen (jam 23:59 default, bisa diubah admin)
+        $deadline = $this->getDeadline();
+        $isPastDeadline = $this->isPastDeadline($deadline);
 
-        return view('mahasiswa.absen', compact('nim', 'nama', 'kelas', 'sudahAbsen', 'deadline'));
+        return view('mahasiswa.absen', compact('nim', 'nama', 'kelas', 'sudahAbsen', 'deadline', 'isPastDeadline'));
     }
 
     /** Absen dengan wajah */
@@ -49,6 +69,11 @@ class MahasiswaAbsenController extends Controller
 
         if ($sudah) {
             return back()->with('error', 'Anda sudah melakukan absensi hari ini. Status: ' . ucfirst($sudah->status));
+        }
+
+        $deadline = $this->getDeadline();
+        if ($this->isPastDeadline($deadline)) {
+            return back()->with('error', $this->deadlineMessage($deadline));
         }
 
         $request->validate([
@@ -120,6 +145,11 @@ class MahasiswaAbsenController extends Controller
 
         if ($sudah) {
             return back()->with('error', 'Anda sudah melakukan absensi hari ini. Status: ' . ucfirst($sudah->status));
+        }
+
+        $deadline = $this->getDeadline();
+        if ($this->isPastDeadline($deadline)) {
+            return back()->with('error', $this->deadlineMessage($deadline));
         }
 
         DB::table('absensi')->insert([

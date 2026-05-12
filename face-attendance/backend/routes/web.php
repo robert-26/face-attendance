@@ -33,6 +33,8 @@ Route::get('/absen/riwayat', [MahasiswaAbsenController::class, 'riwayatPage'])->
 // ============================
 Route::middleware(['web'])->group(function () {
     Route::get('/dashboard',               [AuthController::class,    'dashboard'])->name('dashboard');
+    Route::post('/settings/update',        [AuthController::class,    'updateSettings'])->name('settings.update');
+
     Route::get('/mahasiswa',               [MahasiswaController::class, 'index'])->name('mahasiswa.index');
     Route::post('/mahasiswa/store',        [MahasiswaController::class, 'store'])->name('mahasiswa.store');
     Route::post('/mahasiswa/update/{id}',  [MahasiswaController::class, 'update'])->name('mahasiswa.update');

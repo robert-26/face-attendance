@@ -6,84 +6,84 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         flex-wrap: wrap;
         gap: 1rem;
     }
     .profile-card {
-        background: linear-gradient(135deg, rgba(167,139,250,0.1), rgba(124,58,237,0.05));
-        border: 1px solid rgba(167,139,250,0.2);
-        border-radius: 20px;
-        padding: 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 1.25rem;
-    }
-    .profile-av {
-        width: 64px; height: 64px;
-        border-radius: 16px;
-        background: linear-gradient(135deg, #7c3aed, #a78bfa);
-        display: flex; align-items: center; justify-content: center;
-        font-size: 1.8rem; font-weight: 800; color: #fff;
-        box-shadow: 0 8px 20px rgba(124,58,237,0.4);
-    }
-    .profile-info h2 { font-size: 1.25rem; font-weight: 800; margin: 0 0 0.2rem 0; color: #fff; }
-    .profile-info p { margin: 0; color: rgba(255,255,255,0.6); font-size: 0.9rem; }
-    
-    .status-alert {
-        padding: 1.25rem;
-        border-radius: 16px;
-        margin-bottom: 2rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1rem 1.25rem;
         display: flex;
         align-items: center;
         gap: 1rem;
-        font-weight: 600;
-        font-size: 1.05rem;
     }
-    .status-alert.hadir { background: rgba(52,211,153,0.15); border: 1px solid rgba(52,211,153,0.3); color: #34d399; }
-    .status-alert.izin { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fbbf24; }
-    .status-alert.alpha { background: rgba(248,113,113,0.15); border: 1px solid rgba(248,113,113,0.3); color: #f87171; }
+    .profile-av {
+        width: 44px; height: 44px;
+        border-radius: 10px;
+        background: var(--accent);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.1rem; font-weight: 700; color: #fff;
+    }
+    .profile-info h2 { font-size: 1rem; font-weight: 700; margin: 0 0 0.15rem 0; color: var(--text); }
+    .profile-info p { margin: 0; color: var(--text-secondary); font-size: .78rem; }
+    
+    .status-alert {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+        font-weight: 600;
+        font-size: .875rem;
+    }
+    .status-alert.hadir { background: rgba(16,185,129,.08); border: 1px solid rgba(16,185,129,.18); color: #34d399; }
+    .status-alert.izin { background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.18); color: #fbbf24; }
+    .status-alert.alpha { background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.18); color: #f87171; }
+    .status-alert.closed { background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.18); color: #f87171; }
     
     .action-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
+        gap: 1rem;
     }
     
     .action-card {
-        background: rgba(255,255,255,0.04);
-        backdrop-filter: blur(16px);
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 20px;
-        padding: 2rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.5rem;
         text-align: center;
-        transition: transform 0.3s;
+        transition: border-color .15s;
     }
-    .action-card:hover { transform: translateY(-5px); }
+    .action-card:hover { border-color: rgba(255,255,255,.14); }
     
     .action-icon {
-        width: 80px; height: 80px;
-        margin: 0 auto 1.5rem;
-        border-radius: 50%;
+        width: 56px; height: 56px;
+        margin: 0 auto 1.25rem;
+        border-radius: 12px;
         display: flex; align-items: center; justify-content: center;
-        font-size: 2.5rem;
+        font-size: 1.5rem;
     }
-    .icon-absen { background: rgba(52,211,153,0.1); color: #34d399; box-shadow: 0 0 30px rgba(52,211,153,0.2); }
-    .icon-izin { background: rgba(251,191,36,0.1); color: #fbbf24; box-shadow: 0 0 30px rgba(251,191,36,0.2); }
+    .icon-absen { background: rgba(16,185,129,.1); }
+    .icon-izin { background: rgba(245,158,11,.1); }
     
-    .action-title { font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
-    .action-desc { font-size: 0.9rem; color: rgba(255,255,255,0.5); margin-bottom: 2rem; line-height: 1.5; }
+    .action-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: .35rem; }
+    .action-desc { font-size: .8125rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.5; }
     
     .absen-btn {
-        width: 100%; padding: 1rem;
-        border-radius: 12px; font-weight: 700; font-size: 1rem;
-        border: none; cursor: pointer; transition: all 0.3s;
+        width: 100%; padding: .7rem;
+        border-radius: 8px; font-weight: 600; font-size: .875rem;
+        border: none; cursor: pointer; transition: background .15s;
+        font-family: 'Inter', sans-serif;
     }
-    .btn-hadir { background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 4px 15px rgba(16,185,129,0.4); }
-    .btn-hadir:hover { box-shadow: 0 8px 25px rgba(16,185,129,0.6); transform: translateY(-2px); }
+    .btn-hadir { background: var(--success); color: #fff; }
+    .btn-hadir:hover { background: #059669; }
     
-    .btn-izin { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; box-shadow: 0 4px 15px rgba(245,158,11,0.4); }
-    .btn-izin:hover { box-shadow: 0 8px 25px rgba(245,158,11,0.6); transform: translateY(-2px); }
+    .btn-izin { background: var(--warning); color: #fff; }
+    .btn-izin:hover { background: #d97706; }
 </style>
 
 <div class="mhs-header">
@@ -99,7 +99,7 @@
         <div class="profile-av">{{ strtoupper(substr($nama, 0, 1)) }}</div>
         <div class="profile-info">
             <h2>{{ $nama }}</h2>
-            <p>{{ $nim }} • Kelas {{ $kelas }}</p>
+            <p>{{ $nim }} · Kelas {{ $kelas }}</p>
         </div>
     </div>
 </div>
@@ -107,12 +107,12 @@
 <div class="glass-card mb-4">
     <div class="glass-card-body d-flex justify-content-between align-items-center flex-wrap gap-3">
         <div>
-            <div style="font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.25rem;">Tanggal Hari Ini</div>
-            <div style="font-size: 1.25rem; font-weight: 700; color: #fff;">{{ now()->translatedFormat('l, d F Y') }}</div>
+            <div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.2rem;">Tanggal Hari Ini</div>
+            <div style="font-size:1rem;font-weight:700;color:var(--text);">{{ now()->translatedFormat('l, d F Y') }}</div>
         </div>
         <div class="text-end">
-            <div style="font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.25rem;">Batas Waktu Absen</div>
-            <div style="font-size: 1.25rem; font-weight: 700; color: #f87171;">{{ $deadline }} WIB</div>
+            <div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.2rem;">Batas Waktu Absen</div>
+            <div style="font-size:1rem;font-weight:700;color:#f87171;">{{ $deadline }} WIB</div>
         </div>
     </div>
 </div>
@@ -120,15 +120,20 @@
 @if($sudahAbsen)
     <div class="status-alert {{ strtolower($sudahAbsen->status) }}">
         @if(strtolower($sudahAbsen->status) == 'hadir')
-            <span style="font-size: 1.5rem;">✅</span> 
+            <span style="font-size: 1.25rem;">✅</span> 
             <div>Anda telah tercatat <strong>HADIR</strong> pada pukul {{ $sudahAbsen->waktu }}. Terima kasih!</div>
         @elseif(strtolower($sudahAbsen->status) == 'izin')
-            <span style="font-size: 1.5rem;">📝</span> 
+            <span style="font-size: 1.25rem;">📝</span> 
             <div>Anda telah mengajukan <strong>IZIN</strong> pada pukul {{ $sudahAbsen->waktu }}. Keterangan: {{ $sudahAbsen->keterangan }}</div>
         @else
-            <span style="font-size: 1.5rem;">❌</span> 
+            <span style="font-size: 1.25rem;">❌</span> 
             <div>Anda tercatat <strong>ALPHA</strong> hari ini.</div>
         @endif
+    </div>
+@elseif($isPastDeadline)
+    <div class="status-alert closed">
+        <span style="font-size: 1.25rem;">!</span>
+        <div>Absensi hari ini sudah ditutup. Batas waktu absensi adalah pukul <strong>{{ $deadline }} WIB</strong>.</div>
     </div>
 @else
     <div class="action-grid">
@@ -161,22 +166,22 @@
 {{-- Modal Izin --}}
 <div class="modal fade" id="izinModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="background: rgba(15,12,41,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; color: #fff;">
-            <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                <h5 class="modal-title" style="font-weight: 700;">Pengajuan Izin</h5>
+        <div class="modal-content" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; color: var(--text);">
+            <div class="modal-header" style="border-bottom: 1px solid var(--border);">
+                <h5 class="modal-title" style="font-weight: 600; font-size:.875rem;">Pengajuan Izin</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{ route('mhs.absen.izin') }}" method="POST">
                 @csrf
                 <div class="modal-body p-4">
                     <div class="mb-3">
-                        <label class="form-label" style="color: rgba(255,255,255,0.6); font-size: 0.85rem; text-transform: uppercase;">Keterangan Izin</label>
-                        <textarea class="form-control" name="keterangan" rows="4" placeholder="Tuliskan alasan izin Anda (Sakit, Acara Keluarga, dll)..." required style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem;"></textarea>
+                        <label class="form-label">Keterangan Izin</label>
+                        <textarea class="form-control" name="keterangan" rows="4" placeholder="Tuliskan alasan izin Anda (Sakit, Acara Keluarga, dll)..." required></textarea>
                     </div>
                 </div>
-                <div class="modal-footer" style="border-top: 1px solid rgba(255,255,255,0.05);">
+                <div class="modal-footer" style="border-top: 1px solid var(--border);">
                     <button type="button" class="btn btn-secondary-modern" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-warning-modern" style="border-radius: 12px;">Kirim Pengajuan Izin</button>
+                    <button type="submit" class="btn btn-warning-modern" style="border-radius: 8px; padding:.45rem .875rem; font-size:.8125rem; font-weight:600; border:none; cursor:pointer;">Kirim Pengajuan Izin</button>
                 </div>
             </form>
         </div>
@@ -186,13 +191,13 @@
 {{-- Modal Kamera --}}
 <div class="modal fade" id="cameraModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="background: rgba(15,12,41,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; color: #fff;">
-            <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                <h5 class="modal-title" style="font-weight: 700;">Ambil Foto Wajah</h5>
+        <div class="modal-content" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; color: var(--text);">
+            <div class="modal-header" style="border-bottom: 1px solid var(--border);">
+                <h5 class="modal-title" style="font-weight: 600; font-size:.875rem;">Ambil Foto Wajah</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="closeCamera()"></button>
             </div>
             <div class="modal-body p-4 text-center">
-                <video id="webcam" autoplay playsinline style="width: 100%; max-height: 400px; border-radius: 12px; background: #000; transform: scaleX(-1);"></video>
+                <video id="webcam" autoplay playsinline style="width: 100%; max-height: 400px; border-radius: 8px; background: #000; transform: scaleX(-1);"></video>
                 <canvas id="canvas" style="display: none;"></canvas>
                 <form action="{{ route('mhs.absen.wajah') }}" method="POST" id="formHadir" class="mt-3">
                     @csrf
