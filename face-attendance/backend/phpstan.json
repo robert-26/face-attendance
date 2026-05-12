@@ -1,0 +1,16 @@
+{
+  "php": {
+    "version": 8
+  },
+  "paths": [
+    "app",
+    "routes"
+  ],
+  "analysis": {
+    "enabled": true,
+    "level": 7
+  },
+  "exclude": [
+    "vendor"
+  ]
+}
